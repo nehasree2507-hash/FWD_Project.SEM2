@@ -313,25 +313,20 @@
     border-radius: 5px;
   }
 
-  .status-select {
-    font-size: 11px; font-weight: 600; font-family: 'DM Sans', sans-serif;
-    padding: 4px 10px; border-radius: 5px; border: none;
-    cursor: pointer; outline: none; appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2371717a'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 8px center;
-    padding-right: 24px;
-    transition: all 0.15s;
-  }
-  .status-select-active  { background-color: var(--green-bg); color: var(--green); }
-  .status-select-review  { background-color: var(--amber-bg); color: var(--amber); }
-  .status-select-blocked { background-color: var(--red-bg);   color: var(--red); }
-  .status-select:hover { filter: brightness(0.96); }
-
   .sp-active  { background: var(--green-bg); color: var(--green); }
   .sp-review  { background: var(--amber-bg); color: var(--amber); }
   .sp-blocked { background: var(--red-bg);   color: var(--red); }
+
+  .status-select {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 8px; border-radius: 5px;
+    border: none; cursor: pointer; outline: none;
+    appearance: none; -webkit-appearance: none;
+    text-align: center;
+  }
+  .status-select.sp-active  { background: var(--green-bg); color: var(--green); }
+  .status-select.sp-review  { background: var(--amber-bg); color: var(--amber); }
+  .status-select.sp-blocked { background: var(--red-bg);   color: var(--red); }
 
   /* REPORT TABLES */
   .report-table-wrap {
@@ -394,350 +389,267 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-label">Menu</div>
-    <div class="nav-item active" onclick="showView('dashboard')"><span class="icon">⊞</span> Dashboard</div>
-    <div class="nav-item" onclick="showView('developers')"><span class="icon">👥</span> Developers</div>
-
-    <div class="sidebar-label">Categories</div>
-    <div class="nav-item" onclick="showView('employee')"><span class="icon">👤</span> Employee Info</div>
-    <div class="nav-item" onclick="showView('output')"><span class="icon">📦</span> Output</div>
-    <div class="nav-item" onclick="showView('time')"><span class="icon">⏱️</span> Time Metrics</div>
-    <div class="nav-item" onclick="showView('quality')"><span class="icon">🔍</span> Quality Check</div>
+    <a class="nav-item active" href="dashboard.html"><span class="icon">⊞</span> Dashboard</a>
+    <a class="nav-item" href="details.html"><span class="icon">👥</span> Developers</a>
+    <a class="nav-item" href="details.html"><span class="icon">✓</span> Tasks</a>
 
     <div class="sidebar-label">Reports</div>
-    <div class="nav-item" onclick="showView('attendance')"><span class="icon">📅</span> Attendance</div>
-    <div class="nav-item" onclick="showView('performance')"><span class="icon">📊</span> Performance</div>
+    <a class="nav-item" href="#attendance-report" onclick="scrollTo('attendance-report')"><span class="icon">📅</span> Attendance</a>
+    <a class="nav-item" href="#performance-report" onclick="scrollTo('performance-report')"><span class="icon">📊</span> Performance</a>
   </aside>
 
   <!-- MAIN -->
-  <main class="main" id="mainArea"></main>
+  <main class="main">
+
+    <div class="page-head">
+      <h1>Dashboard</h1>
+      <p>Sprint 24 overview — all developer activity at a glance.</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">Total Developers</div>
+        <div class="value">6</div>
+        <span class="tag tag-blue">Active team</span>
+      </div>
+      <div class="stat-card">
+        <div class="label">Tasks This Sprint</div>
+        <div class="value">24</div>
+        <span class="tag tag-green">17 completed</span>
+      </div>
+      <div class="stat-card">
+        <div class="label">Bugs Resolved</div>
+        <div class="value">53</div>
+        <span class="tag tag-amber">7 pending</span>
+      </div>
+      <div class="stat-card">
+        <div class="label">Avg Performance</div>
+        <div class="value">79<span style="font-size:18px;color:var(--muted);font-family:'DM Sans'">/100</span></div>
+        <span class="tag tag-green">↑ Good</span>
+      </div>
+    </div>
+
+    <!-- SECTIONS OVERVIEW -->
+    <div class="sections-grid">
+
+      <!-- What's tracked -->
+      <div class="section-box">
+        <div class="section-title">
+          What's Tracked
+          <a class="view-all" href="details.html">View All →</a>
+        </div>
+        <ul class="category-list">
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#eff6ff">👤</div>
+              <div>
+                <div class="cat-name">Employee Info</div>
+                <div class="cat-desc">Name, ID, Department, Role</div>
+              </div>
+            </div>
+            <a href="details.html#employee" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#f0fdf4">✅</div>
+              <div>
+                <div class="cat-name">Tasks & Projects</div>
+                <div class="cat-desc">Assignments, Due Dates, Status</div>
+              </div>
+            </div>
+            <a href="details.html#tasks" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#fffbeb">📦</div>
+              <div>
+                <div class="cat-name">Output / Deliverables</div>
+                <div class="cat-desc">Reports, Tickets, Calls</div>
+              </div>
+            </div>
+            <a href="details.html#output" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#fdf4ff">⏱️</div>
+              <div>
+                <div class="cat-name">Time Metrics</div>
+                <div class="cat-desc">Hours Worked, Task Duration</div>
+              </div>
+            </div>
+            <a href="details.html#time" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#fff1f1">🔍</div>
+              <div>
+                <div class="cat-name">Quality Check</div>
+                <div class="cat-desc">Error Rate, Feedback, Review Score</div>
+              </div>
+            </div>
+            <a href="details.html#quality" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#f0fdf4">📅</div>
+              <div>
+                <div class="cat-name">Attendance & Engagement</div>
+                <div class="cat-desc">Presence, Lateness, Meetings</div>
+              </div>
+            </div>
+            <a href="details.html#attendance" class="cat-link">View →</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dev Summary -->
+      <div class="section-box">
+        <div class="section-title">
+          Developer Summary
+          <a class="view-all" href="details.html">View All →</a>
+        </div>
+        <div class="dev-summary-list" id="devSummary"></div>
+      </div>
+
+    </div>
+
+    <!-- ATTENDANCE REPORT -->
+    <div class="report-section" id="attendance-report" style="margin-bottom:36px">
+      <div class="section-title">📅 Attendance Report <span>All Employees · Sprint 24</span></div>
+      <div class="report-table-wrap">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Role</th>
+              <th>Days Present</th>
+              <th>Late Arrivals</th>
+              <th>Meetings Attended</th>
+              <th>Attendance %</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE REPORT -->
+    <div class="report-section" id="performance-report">
+      <div class="section-title">📊 Performance Report <span>All Employees · Sprint 24</span></div>
+      <div class="report-table-wrap">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Role</th>
+              <th>Error Rate</th>
+              <th>Client Feedback</th>
+              <th>Review Score</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="performanceTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
 </div>
 
 <script>
+  function scrollTo(id) {
+    event.preventDefault();
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
   // Auth guard
   const user = JSON.parse(localStorage.getItem('devtrack_loggedIn') || 'null');
   if (!user) { window.location.href = 'login.html'; }
   else { document.getElementById('welcomeUser').textContent = 'Hi, ' + user.name; }
-  function logout() { localStorage.removeItem('devtrack_loggedIn'); window.location.href = 'login.html'; }
 
-  // ── LOAD DEVS ──
-  const defaultDevs = [
-    { name:'Priya Sharma',  init:'PS', bg:'#dbeafe', tc:'#1e40af', id:'EMP-001', dept:'Engineering', role:'Senior Frontend Engineer', status:'Active',
-      tasks:[{desc:'Auth token refresh on mobile',assigned:'Feb 24',due:'Mar 07',status:'In Progress'},{desc:'Dashboard CSV export feature',assigned:'Feb 26',due:'Mar 10',status:'Pending'},{desc:'Fix login redirect bug',assigned:'Feb 20',due:'Feb 28',status:'Completed'}],
-      output:{reports:4,tickets:18,calls:7}, time:{hoursDay:8.2,hoursWeek:41,taskDuration:'3.5h avg'}, quality:{errorRate:'1.2%',feedback:'4.7/5',reviewScore:'92/100',score:92}, attendance:{present:18,late:1,meetings:12}},
-    { name:'Marcus Torres', init:'MT', bg:'#dcfce7', tc:'#166534', id:'EMP-002', dept:'Engineering', role:'Backend Engineer', status:'Active',
-      tasks:[{desc:'Fix race condition in job queue',assigned:'Feb 22',due:'Mar 06',status:'In Progress'},{desc:'Update OpenAPI spec to v3',assigned:'Feb 28',due:'Mar 09',status:'In Progress'},{desc:'Database indexing optimization',assigned:'Feb 15',due:'Feb 25',status:'Completed'}],
-      output:{reports:3,tickets:21,calls:5}, time:{hoursDay:8.0,hoursWeek:40,taskDuration:'4.1h avg'}, quality:{errorRate:'0.8%',feedback:'4.9/5',reviewScore:'96/100',score:96}, attendance:{present:20,late:0,meetings:14}},
-    { name:'Yuki Nakamura', init:'YN', bg:'#fef9c3', tc:'#854d0e', id:'EMP-003', dept:'Engineering', role:'Full Stack Developer', status:'Blocked',
-      tasks:[{desc:'Pagination bug on filtered views',assigned:'Feb 25',due:'Mar 07',status:'Blocked'},{desc:'Notification service refactor',assigned:'Mar 01',due:'Mar 12',status:'Pending'},{desc:'Write unit tests for auth module',assigned:'Feb 18',due:'Feb 27',status:'Completed'}],
-      output:{reports:2,tickets:14,calls:6}, time:{hoursDay:7.5,hoursWeek:37,taskDuration:'5.0h avg'}, quality:{errorRate:'2.4%',feedback:'4.2/5',reviewScore:'74/100',score:74}, attendance:{present:17,late:3,meetings:10}},
-    { name:'Arjun Kapoor',  init:'AK', bg:'#fce7f3', tc:'#9d174d', id:'EMP-004', dept:'DevOps', role:'DevOps Engineer', status:'Active',
-      tasks:[{desc:'Provision staging env access',assigned:'Mar 01',due:'Mar 06',status:'In Progress'},{desc:'CI/CD pipeline fix',assigned:'Feb 26',due:'Mar 02',status:'Completed'},{desc:'Infra update to staging',assigned:'Feb 20',due:'Feb 28',status:'Completed'}],
-      output:{reports:5,tickets:10,calls:9}, time:{hoursDay:8.5,hoursWeek:42,taskDuration:'3.0h avg'}, quality:{errorRate:'0.5%',feedback:'4.8/5',reviewScore:'90/100',score:90}, attendance:{present:20,late:0,meetings:15}},
-    { name:'Chloe Renard',  init:'CR', bg:'#ede9fe', tc:'#5b21b6', id:'EMP-005', dept:'Engineering', role:'Junior Frontend Engineer', status:'Review',
-      tasks:[{desc:'Slack webhook front-end UI',assigned:'Mar 02',due:'Mar 10',status:'In Progress'},{desc:'Write test cases for auth flow',assigned:'Mar 01',due:'Mar 08',status:'Pending'},{desc:'Fix pagination on filtered view',assigned:'Feb 22',due:'Mar 05',status:'Completed'}],
-      output:{reports:2,tickets:9,calls:4}, time:{hoursDay:7.0,hoursWeek:35,taskDuration:'4.8h avg'}, quality:{errorRate:'3.1%',feedback:'3.9/5',reviewScore:'66/100',score:66}, attendance:{present:16,late:4,meetings:9}},
-    { name:'Daniel Osei',   init:'DO', bg:'#fee2e2', tc:'#991b1b', id:'EMP-006', dept:'QA', role:'QA Engineer', status:'Active',
-      tasks:[{desc:'Regression test auth module',assigned:'Mar 03',due:'Mar 07',status:'In Progress'},{desc:'Review Chloe PR DEV-105',assigned:'Mar 04',due:'Mar 06',status:'In Progress'},{desc:'QA test Slack webhook',assigned:'Feb 26',due:'Mar 04',status:'Completed'}],
-      output:{reports:6,tickets:15,calls:8}, time:{hoursDay:8.0,hoursWeek:40,taskDuration:'2.8h avg'}, quality:{errorRate:'0.3%',feedback:'4.6/5',reviewScore:'88/100',score:88}, attendance:{present:19,late:1,meetings:13}},
-  ];
-
-  let devs = JSON.parse(localStorage.getItem('devtrack_devs') || 'null') || defaultDevs;
-  devs = devs.map(d => ({
-    ...d,
-    quality: d.quality || {errorRate:'—',feedback:'—',reviewScore:'—',score:0},
-    attendance: d.attendance || {present:0,late:0,meetings:0},
-    output: d.output || {reports:0,tickets:0,calls:0},
-    time: d.time || {hoursDay:0,hoursWeek:0,taskDuration:'—'},
-    tasks: d.tasks || []
-  }));
-
-  // ── HELPERS ──
-  const sc = { 'Completed':'c-green','In Progress':'c-blue','Pending':'c-amber','Blocked':'c-red','Active':'c-green','Review':'c-amber' };
-  function chip(val) { return `<span style="display:inline-block;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:600;background:${val==='Active'||val==='Completed'?'#dcfce7':val==='Review'||val==='Pending'?'#fef9c3':'#fee2e2'};color:${val==='Active'||val==='Completed'?'#15803d':val==='Review'||val==='Pending'?'#b45309':'#b91c1c'}">${val}</span>`; }
-  function av(d) { return `<span style="width:28px;height:28px;border-radius:7px;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;background:${d.bg};color:${d.tc}">${d.init}</span>`; }
-  function rating(s) { return s>=88?'<span class="rating-pill r-excellent">Excellent</span>':s>=72?'<span class="rating-pill r-good">Good</span>':'<span class="rating-pill r-review">Needs Review</span>'; }
-  function attPct(p) { return Math.round((p/20)*100)+'%'; }
-  function tbl(heads, rows) {
-    return `<div class="report-table-wrap"><table class="report-table">
-      <thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>`;
-  }
-  function pageHead(title, sub) {
-    return `<div class="page-head"><h1>${title}</h1><p>${sub}</p></div>`;
+  function logout() {
+    localStorage.removeItem('devtrack_loggedIn');
+    window.location.href = 'login.html';
   }
 
-  // ── SAVE STATUS ──
-  function saveDevStatus(i, val) {
-    devs[i].status = val;
-    const stored = JSON.parse(localStorage.getItem('devtrack_devs') || 'null');
-    if (stored && stored[i]) { stored[i].status = val; localStorage.setItem('devtrack_devs', JSON.stringify(stored)); }
-  }
-  function changeStatus(el, i) {
-    saveDevStatus(i, el.value);
-    el.className = `status-select status-select-${el.value.toLowerCase()}`;
+  // Dev summary + report data
+  // Always load latest from localStorage
+  var devs = JSON.parse(localStorage.getItem('devtrack_devs') || '[]');
+
+  function saveDevs() {
+    localStorage.setItem('devtrack_devs', JSON.stringify(devs));
   }
 
-  // ── CATEGORY ONLY VIEW (from What's Tracked clicks) ──
-  function showCategoryOnly(view, title) {
-    devs = (JSON.parse(localStorage.getItem('devtrack_devs') || 'null') || defaultDevs).map(d => ({
-      ...d,
-      quality: d.quality || {errorRate:'—',feedback:'—',reviewScore:'—',score:0},
-      attendance: d.attendance || {present:0,late:0,meetings:0},
-      output: d.output || {reports:0,tickets:0,calls:0},
-      time: d.time || {hoursDay:0,hoursWeek:0,taskDuration:'—'},
-      tasks: d.tasks || []
-    }));
-
-    const backBtn = `<button onclick="showView('dashboard')" style="display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;padding:7px 14px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;color:#18181b;" onmouseover="this.style.background='#f5f4f0'" onmouseout="this.style.background='#fff'">← Back to Dashboard</button>`;
-    const heading = `<h2 style="font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:4px;">${title}</h2><p style="font-size:13px;color:#71717a;margin-bottom:24px;">All employees · Sprint 24</p>`;
-    const main = document.getElementById('mainArea');
-
-    let content = '';
-
-    if (view === 'employee') {
-      content = tbl(['Employee','ID','Department','Role','Status'],
-        devs.map(d=>`<tr>
-          <td>${av(d)}${d.name}</td>
-          <td style="color:#71717a">${d.id||'—'}</td>
-          <td style="color:#71717a">${d.dept||'—'}</td>
-          <td>${d.role}</td>
-          <td>${chip(d.status||'Active')}</td>
-        </tr>`).join(''));
-    } else if (view === 'tasks') {
-      const rows = devs.map(d => (d.tasks||[]).map(t=>`<tr>
-        <td>${av(d)}${d.name}</td>
-        <td>${t.desc}</td>
-        <td style="color:#71717a">${t.assigned}</td>
-        <td style="color:#71717a">${t.due}</td>
-        <td>${chip(t.status)}</td>
-      </tr>`).join('')).join('');
-      content = tbl(['Developer','Task','Assigned','Due','Status'], rows);
-    } else if (view === 'output') {
-      content = tbl(['Employee','Role','Reports','Tickets Resolved','Client Calls','Tasks Done'],
-        devs.map(d=>`<tr>
-          <td>${av(d)}${d.name}</td>
-          <td style="color:#71717a">${d.role}</td>
-          <td>${d.output.reports}</td>
-          <td>${d.output.tickets}</td>
-          <td>${d.output.calls}</td>
-          <td>${(d.tasks||[]).filter(t=>t.status==='Completed').length} / ${(d.tasks||[]).length}</td>
-        </tr>`).join(''));
-    } else if (view === 'time') {
-      content = tbl(['Employee','Role','Avg Hrs / Day','Hrs This Week','Avg Task Duration','In Progress'],
-        devs.map(d=>`<tr>
-          <td>${av(d)}${d.name}</td>
-          <td style="color:#71717a">${d.role}</td>
-          <td>${d.time.hoursDay}h</td>
-          <td>${d.time.hoursWeek}h</td>
-          <td>${d.time.taskDuration}</td>
-          <td>${(d.tasks||[]).filter(t=>t.status==='In Progress').length} tasks</td>
-        </tr>`).join(''));
-    } else if (view === 'quality') {
-      content = tbl(['Employee','Role','Error Rate','Client Feedback','Review Score','Rating'],
-        devs.map(d=>`<tr>
-          <td>${av(d)}${d.name}</td>
-          <td style="color:#71717a">${d.role}</td>
-          <td>${d.quality.errorRate}</td>
-          <td>${d.quality.feedback}</td>
-          <td>${d.quality.reviewScore}</td>
-          <td>${rating(d.quality.score||0)}</td>
-        </tr>`).join(''));
-    } else if (view === 'attendance') {
-      content = tbl(['Employee','Role','Days Present','Late Arrivals','Meetings Attended','Attendance %'],
-        devs.map(d=>`<tr>
-          <td>${av(d)}${d.name}</td>
-          <td style="color:#71717a">${d.role}</td>
-          <td>${d.attendance.present} / 20</td>
-          <td style="${d.attendance.late>2?'color:#b91c1c;font-weight:600':''}">${d.attendance.late}</td>
-          <td>${d.attendance.meetings}</td>
-          <td><strong>${attPct(d.attendance.present)}</strong></td>
-        </tr>`).join(''));
-    }
-
-    main.innerHTML = backBtn + heading + content;
+  function rating(score) {
+    if (score >= 88) return `<span class="rating-pill r-excellent">Excellent</span>`;
+    if (score >= 72) return `<span class="rating-pill r-good">Good</span>`;
+    return `<span class="rating-pill r-review">Needs Review</span>`;
   }
 
-  // ── VIEWS ──
-  let currentView = 'dashboard';
+  function attPct(present) { return Math.round((present/20)*100) + '%'; }
+  function lateColor(late) { return late > 2 ? 'color:#b91c1c;font-weight:600' : ''; }
 
-  function showView(view) {
-    currentView = view;
-    // Reload devs fresh each time
-    devs = (JSON.parse(localStorage.getItem('devtrack_devs') || 'null') || defaultDevs).map(d => ({
-      ...d,
-      quality: d.quality || {errorRate:'—',feedback:'—',reviewScore:'—',score:0},
-      attendance: d.attendance || {present:0,late:0,meetings:0},
-      output: d.output || {reports:0,tickets:0,calls:0},
-      time: d.time || {hoursDay:0,hoursWeek:0,taskDuration:'—'},
-      tasks: d.tasks || []
-    }));
+  function av(d) { return `<span class="mini-av-sm" style="background:${d.bg};color:${d.tc}">${d.init}</span>`; }
 
-    // Update active state in sidebar
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-    event && event.currentTarget && event.currentTarget.classList.add('active');
-
-    const main = document.getElementById('mainArea');
-
-    if (view === 'dashboard') {
-      const totalTasks = devs.reduce((s,d) => s + (d.tasks||[]).length, 0);
-      const completedTasks = devs.reduce((s,d) => s + (d.tasks||[]).filter(t=>t.status==='Completed').length, 0);
-      const avgScore = Math.round(devs.reduce((s,d) => s + (d.quality?.score||0), 0) / devs.length);
-      const totalTickets = devs.reduce((s,d) => s + (d.output?.tickets||0), 0);
-      main.innerHTML = `
-        ${pageHead('Dashboard','Sprint 24 overview — all developer activity at a glance.')}
-        <div class="stat-grid">
-          <div class="stat-card"><div class="label">Total Developers</div><div class="value">${devs.length}</div><span class="tag tag-blue">Active team</span></div>
-          <div class="stat-card"><div class="label">Tasks This Sprint</div><div class="value">${totalTasks}</div><span class="tag tag-green">${completedTasks} completed</span></div>
-          <div class="stat-card"><div class="label">Bugs Resolved</div><div class="value">${totalTickets}</div><span class="tag tag-amber">This sprint</span></div>
-          <div class="stat-card"><div class="label">Avg Performance</div><div class="value">${avgScore}<span style="font-size:18px;color:var(--muted);font-family:'DM Sans'">/100</span></div><span class="tag tag-green">↑ Good</span></div>
-        </div>
-        <div class="sections-grid">
-          <div class="section-box">
-            <div class="section-title">What's Tracked</div>
-            <ul class="category-list">
-              ${[['👤','Employee Info','Name, ID, Department, Role','employee'],['✅','Tasks & Projects','Assignments, Due Dates, Status','tasks'],['📦','Output / Deliverables','Reports, Tickets, Calls','output'],['⏱️','Time Metrics','Hours Worked, Task Duration','time'],['🔍','Quality Check','Error Rate, Feedback, Review Score','quality'],['📅','Attendance & Engagement','Presence, Lateness, Meetings','attendance']].map(([ic,nm,ds,vw])=>`
-              <li class="category-item">
-                <div class="category-left"><div class="cat-icon">${ic}</div><div><div class="cat-name">${nm}</div><div class="cat-desc">${ds}</div></div></div>
-                <span class="cat-link" style="cursor:pointer" onclick="showCategoryOnly('${vw}','${nm}')">View →</span>
-              </li>`).join('')}
-            </ul>
-          </div>
-          <div class="section-box">
-            <div class="section-title">Developer Summary</div>
-            <div class="dev-summary-list">
-              ${devs.map((d,i)=>`
-              <div class="dev-summary-row">
-                <div class="dev-summary-left">
-                  <div class="mini-av" style="background:${d.bg};color:${d.tc}">${d.init}</div>
-                  <div><div class="dev-summary-name">${d.name}</div><div class="dev-summary-role">${d.role}</div></div>
-                </div>
-                <select class="status-select status-select-${(d.status||'Active').toLowerCase()}" onchange="changeStatus(this,${i})">
-                  <option ${d.status==='Active'?'selected':''}>Active</option>
-                  <option ${d.status==='Review'?'selected':''}>Review</option>
-                  <option ${d.status==='Blocked'?'selected':''}>Blocked</option>
-                </select>
-              </div>`).join('')}
+  // Dev summary
+  function renderDevSummary() {
+    const list = document.getElementById('devSummary');
+    list.innerHTML = '';
+    devs.forEach((d, i) => {
+      list.innerHTML += `
+        <div class="dev-summary-row">
+          <div class="dev-summary-left">
+            <div class="mini-av" style="background:${d.bg};color:${d.tc}">${d.init}</div>
+            <div>
+              <div class="dev-summary-name">${d.name}</div>
+              <div class="dev-summary-role">${d.role}</div>
             </div>
           </div>
+          <select class="status-select ${d.sc}" onchange="changeStatus(${i}, this.value)">
+            <option value="Active"  ${d.status==='Active'  ? 'selected' : ''}>Active</option>
+            <option value="Review"  ${d.status==='Review'  ? 'selected' : ''}>Review</option>
+            <option value="Blocked" ${d.status==='Blocked' ? 'selected' : ''}>Blocked</option>
+          </select>
         </div>`;
-    }
-
-    else if (view === 'developers') {
-      main.innerHTML = `
-        ${pageHead('All Developers', 'Full list of developers on the team.')}
-        <div class="report-table-wrap"><table class="report-table">
-          <thead><tr><th>Employee</th><th>ID</th><th>Department</th><th>Role</th><th>Status</th><th>Action</th></tr></thead>
-          <tbody>${devs.map((d,i)=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.id||'—'}</td>
-            <td style="color:#71717a">${d.dept||'—'}</td>
-            <td>${d.role}</td>
-            <td>${chip(d.status||'Active')}</td>
-            <td><a href="details.html" style="color:#7c3aed;font-size:12px;font-weight:600;text-decoration:none">View Profile →</a></td>
-          </tr>`).join('')}</tbody>
-        </table></div>`;
-    }
-
-    else if (view === 'employee') {
-      main.innerHTML = `
-        ${pageHead('Employee Info', 'Basic identification details for all developers.')}
-        ${tbl(['Employee','ID','Department','Role','Status'],
-          devs.map(d=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.id||'—'}</td>
-            <td style="color:#71717a">${d.dept||'—'}</td>
-            <td>${d.role}</td>
-            <td>${chip(d.status||'Active')}</td>
-          </tr>`).join(''))}`;
-    }
-
-    else if (view === 'tasks') {
-      const rows = devs.map(d => (d.tasks||[]).map(t=>`<tr>
-        <td>${av(d)}${d.name}</td>
-        <td>${t.desc}</td>
-        <td style="color:#71717a">${t.assigned}</td>
-        <td style="color:#71717a">${t.due}</td>
-        <td>${chip(t.status)}</td>
-      </tr>`).join('')).join('');
-      main.innerHTML = `
-        ${pageHead('Tasks & Projects', 'All tasks assigned this sprint across all developers.')}
-        ${tbl(['Developer','Task','Assigned','Due','Status'], rows)}`;
-    }
-
-    else if (view === 'output') {
-      main.innerHTML = `
-        ${pageHead('Output & Deliverables', 'Tangible work produced this sprint by each developer.')}
-        ${tbl(['Employee','Role','Reports Submitted','Tickets Resolved','Client Calls','Tasks Done'],
-          devs.map(d=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.role}</td>
-            <td>${d.output.reports}</td>
-            <td>${d.output.tickets}</td>
-            <td>${d.output.calls}</td>
-            <td>${(d.tasks||[]).filter(t=>t.status==='Completed').length} / ${(d.tasks||[]).length}</td>
-          </tr>`).join(''))}`;
-    }
-
-    else if (view === 'time') {
-      main.innerHTML = `
-        ${pageHead('Time Metrics', 'How each developer is spending their time this sprint.')}
-        ${tbl(['Employee','Role','Avg Hrs / Day','Hrs This Week','Avg Task Duration','In Progress'],
-          devs.map(d=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.role}</td>
-            <td>${d.time.hoursDay}h</td>
-            <td>${d.time.hoursWeek}h</td>
-            <td>${d.time.taskDuration}</td>
-            <td>${(d.tasks||[]).filter(t=>t.status==='In Progress').length} tasks</td>
-          </tr>`).join(''))}`;
-    }
-
-    else if (view === 'quality') {
-      main.innerHTML = `
-        ${pageHead('Quality Check', 'Accuracy and quality of work across all developers.')}
-        ${tbl(['Employee','Role','Error Rate','Client Feedback','Review Score','Rating'],
-          devs.map(d=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.role}</td>
-            <td>${d.quality.errorRate}</td>
-            <td>${d.quality.feedback}</td>
-            <td>${d.quality.reviewScore}</td>
-            <td>${rating(d.quality.score||0)}</td>
-          </tr>`).join(''))}`;
-    }
-
-    else if (view === 'attendance') {
-      main.innerHTML = `
-        ${pageHead('Attendance Report', 'Presence and participation — all employees · Sprint 24.')}
-        ${tbl(['Employee','Role','Days Present','Late Arrivals','Meetings Attended','Attendance %'],
-          devs.map(d=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.role}</td>
-            <td>${d.attendance.present} / 20</td>
-            <td style="${d.attendance.late>2?'color:#b91c1c;font-weight:600':''}">${d.attendance.late}</td>
-            <td>${d.attendance.meetings}</td>
-            <td><strong>${attPct(d.attendance.present)}</strong></td>
-          </tr>`).join(''))}`;
-    }
-
-    else if (view === 'performance') {
-      main.innerHTML = `
-        ${pageHead('Performance Report', 'Review scores and ratings — all employees · Sprint 24.')}
-        ${tbl(['Employee','Role','Error Rate','Client Feedback','Review Score','Rating'],
-          devs.map(d=>`<tr>
-            <td>${av(d)}${d.name}</td>
-            <td style="color:#71717a">${d.role}</td>
-            <td>${d.quality.errorRate}</td>
-            <td>${d.quality.feedback}</td>
-            <td>${d.quality.reviewScore}</td>
-            <td>${rating(d.quality.score||0)}</td>
-          </tr>`).join(''))}`;
-    }
+    });
   }
 
-  // ── INIT ──
-  showView('dashboard');
+  function changeStatus(i, val) {
+    const scMap = { Active: 'sp-active', Review: 'sp-review', Blocked: 'sp-blocked' };
+    devs[i].status = val;
+    devs[i].sc = scMap[val];
+    saveDevs();
+    renderDevSummary();
+  }
+
+  renderDevSummary();
+
+  // Attendance table
+  const attTbl = document.getElementById('attendanceTable');
+  devs.forEach(d => {
+    attTbl.innerHTML += `<tr>
+      <td>${av(d)}${d.name}</td>
+      <td style="color:#71717a">${d.role}</td>
+      <td>${d.attendance.present} / 20</td>
+      <td style="${lateColor(d.attendance.late)}">${d.attendance.late}</td>
+      <td>${d.attendance.meetings}</td>
+      <td><strong>${attPct(d.attendance.present)}</strong></td>
+    </tr>`;
+  });
+
+  // Performance table
+  const perfTbl = document.getElementById('performanceTable');
+  devs.forEach(d => {
+    perfTbl.innerHTML += `<tr>
+      <td>${av(d)}${d.name}</td>
+      <td style="color:#71717a">${d.role}</td>
+      <td>${d.quality.errorRate}</td>
+      <td>${d.quality.feedback}</td>
+      <td>${d.quality.reviewScore}</td>
+      <td>${rating(d.quality.score)}</td>
+    </tr>`;
+  });
 </script>
 </body>
 </html>
