@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevTrack — Login</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<!-- Left Panel -->
+<div class="left-panel">
+  <div class="brand">Dev<span>Track</span></div>
+  <img src="login.png" alt="Company Image">
+  <p>Track developer performance,<br>tasks, and standups — all in one place.</p>
+</div>
+
+<!-- Right Panel -->
+<div class="right-panel">
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+    <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+  </div>
+
+  <!-- Login Form -->
+  <div class="form-section active" id="loginSection">
+    <h2>Welcome back</h2>
+    <p class="sub">Enter your credentials to continue.</p>
+
+    <div class="alert" id="loginAlert"></div>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="loginEmail" placeholder="you@company.com">
+      <div class="msg" id="loginEmailMsg"></div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="Enter your password">
+      <div class="msg" id="loginPassMsg"></div>
+    </div>
+
+    <button class="submit-btn" onclick="handleLogin()">Login</button>
+  </div>
+
+  <!-- Signup Form -->
+  <div class="form-section" id="signupSection">
+    <h2>Create account</h2>
+    <p class="sub">Fill in your details to get started.</p>
+
+    <div class="alert" id="signupAlert"></div>
+
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" id="signupName" placeholder="Your full name">
+      <div class="msg" id="signupNameMsg"></div>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="signupEmail" placeholder="you@company.com">
+      <div class="msg" id="signupEmailMsg"></div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="signupPassword" placeholder="Min. 6 characters">
+      <div class="msg" id="signupPassMsg"></div>
+    </div>
+
+    <div class="field">
+      <label>Confirm Password</label>
+      <input type="password" id="signupConfirm" placeholder="Repeat password">
+      <div class="msg" id="signupConfirmMsg"></div>
+    </div>
+
+    <button class="submit-btn" onclick="handleSignup()">Create Account</button>
+  </div>
+
+</div>
+<script src="login.js"></script>
+</body>
+</html>

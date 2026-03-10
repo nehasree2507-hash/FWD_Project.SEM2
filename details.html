@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevTrack — Developer Details</title>
+<link rel="stylesheet" href="details.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo"><a href="dashboard.html" style="text-decoration:none;color:inherit">DevTrack</a></div>
+  <div class="topbar-right">
+    <a class="back-btn" href="dashboard.html">← Dashboard</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-label">Developers</div>
+    <div id="devList"></div>
+    <button class="add-dev-btn" onclick="openAddModal()">+ Add Developer</button>
+  </aside>
+
+  <main class="main" id="mainContent">
+    <div class="placeholder">
+      <div class="pi">👈</div>
+      <h2>Select a developer</h2>
+      <p>Pick a developer from the sidebar to see their full profile.</p>
+    </div>
+  </main>
+</div>
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <h3>✏️ Edit Developer</h3>
+    <div class="modal-row">
+      <div><label>Full Name</label><input id="e_name" type="text"></div>
+      <div><label>Employee ID</label><input id="e_id" type="text"></div>
+    </div>
+    <div class="modal-row">
+      <div><label>Department</label><input id="e_dept" type="text"></div>
+      <div><label>Role</label><input id="e_role" type="text"></div>
+    </div>
+    <label>Status</label>
+    <select id="e_status">
+      <option>Active</option><option>Review</option><option>Blocked</option>
+    </select>
+    <div class="modal-row">
+      <div><label>Hours / Day</label><input id="e_hday" type="number" step="0.1"></div>
+      <div><label>Hours / Week</label><input id="e_hweek" type="number" step="0.1"></div>
+    </div>
+    <div class="modal-row">
+      <div><label>Error Rate (%)</label><input id="e_err" type="number" step="0.1"></div>
+      <div><label>Review Score (0–5)</label><input id="e_score" type="number" step="0.1" min="0" max="5"></div>
+    </div>
+    <div class="modal-row">
+      <div><label>Days Present</label><input id="e_present" type="number"></div>
+      <div><label>Late Arrivals</label><input id="e_late" type="number"></div>
+    </div>
+    <label>Meetings Attended</label>
+    <input id="e_meetings" type="number">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('editModal')">Cancel</button>
+      <button class="btn-save" onclick="saveEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Developer Modal -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <h3>➕ Add New Developer</h3>
+    <div class="modal-row">
+      <div><label>Full Name</label><input id="a_name" type="text" placeholder="e.g. R KUMAR"></div>
+      <div><label>Employee ID</label><input id="a_id" type="text" placeholder="e.g. EMP-007"></div>
+    </div>
+    <div class="modal-row">
+      <div><label>Department</label><input id="a_dept" type="text" placeholder="Engineering"></div>
+      <div><label>Role</label><input id="a_role" type="text" placeholder="Frontend Developer"></div>
+    </div>
+    <label>Status</label>
+    <select id="a_status">
+      <option>Active</option><option>Review</option><option>Blocked</option>
+    </select>
+    <div class="modal-row">
+      <div><label>Hours / Day</label><input id="a_hday" type="number" step="0.1" value="8"></div>
+      <div><label>Hours / Week</label><input id="a_hweek" type="number" step="0.1" value="40"></div>
+    </div>
+    <div class="modal-row">
+      <div><label>Error Rate (%)</label><input id="a_err" type="number" step="0.1" value="1.0"></div>
+      <div><label>Review Score (0–5)</label><input id="a_score" type="number" step="0.1" min="0" max="5" value="4.0"></div>
+    </div>
+    <div class="modal-row">
+      <div><label>Days Present</label><input id="a_present" type="number" value="20"></div>
+      <div><label>Late Arrivals</label><input id="a_late" type="number" value="0"></div>
+    </div>
+    <label>Meetings Attended</label>
+    <input id="a_meetings" type="number" value="10">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('addModal')">Cancel</button>
+      <button class="btn-save" onclick="saveDev()">Add Developer</button>
+    </div>
+  </div>
+</div>
+<script src="details.js"></script>
+</body>
+</html>

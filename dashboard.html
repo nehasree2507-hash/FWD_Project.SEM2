@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevTrack — Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">DevTrack</div>
+  <div class="topbar-right">
+    <span class="user-name" id="welcomeUser">Welcome</span>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Menu</div>
+    <a class="nav-item active" href="dashboard.html"><span class="icon">⊞</span> Dashboard</a>
+    <a class="nav-item" href="details.html"><span class="icon">👥</span> Developers</a>
+    <a class="nav-item" href="details.html"><span class="icon">✓</span> Tasks</a>
+
+    <div class="sidebar-label">Reports</div>
+    <a class="nav-item" href="#attendance-report" onclick="scrollTo('attendance-report')"><span class="icon">📅</span> Attendance</a>
+    <a class="nav-item" href="#performance-report" onclick="scrollTo('performance-report')"><span class="icon">📊</span> Performance</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="page-head">
+      <h1>Dashboard</h1>
+      <p>Sprint 24 overview — all developer activity at a glance.</p>
+    </div>
+
+    <!-- STATS -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">Total Developers</div>
+        <div class="value">6</div>
+        <span class="tag tag-blue">Active team</span>
+      </div>
+      <div class="stat-card">
+        <div class="label">Tasks This Sprint</div>
+        <div class="value">24</div>
+        <span class="tag tag-green">17 completed</span>
+      </div>
+      <div class="stat-card">
+        <div class="label">Bugs Resolved</div>
+        <div class="value">53</div>
+        <span class="tag tag-amber">7 pending</span>
+      </div>
+      <div class="stat-card">
+        <div class="label">Avg Performance</div>
+        <div class="value">79<span style="font-size:18px;color:var(--muted);font-family:'DM Sans'">/100</span></div>
+        <span class="tag tag-green">↑ Good</span>
+      </div>
+    </div>
+
+    <!-- SECTIONS OVERVIEW -->
+    <div class="sections-grid">
+
+      <!-- What's tracked -->
+      <div class="section-box">
+        <div class="section-title">
+          What's Tracked
+          <a class="view-all" href="details.html">View All →</a>
+        </div>
+        <ul class="category-list">
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#eff6ff">👤</div>
+              <div>
+                <div class="cat-name">Employee Info</div>
+                <div class="cat-desc">Name, ID, Department, Role</div>
+              </div>
+            </div>
+            <a href="details.html#employee" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#f0fdf4">✅</div>
+              <div>
+                <div class="cat-name">Tasks & Projects</div>
+                <div class="cat-desc">Assignments, Due Dates, Status</div>
+              </div>
+            </div>
+            <a href="details.html#tasks" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#fffbeb">📦</div>
+              <div>
+                <div class="cat-name">Output / Deliverables</div>
+                <div class="cat-desc">Reports, Tickets, Calls</div>
+              </div>
+            </div>
+            <a href="details.html#output" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#fdf4ff">⏱️</div>
+              <div>
+                <div class="cat-name">Time Metrics</div>
+                <div class="cat-desc">Hours Worked, Task Duration</div>
+              </div>
+            </div>
+            <a href="details.html#time" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#fff1f1">🔍</div>
+              <div>
+                <div class="cat-name">Quality Check</div>
+                <div class="cat-desc">Error Rate, Feedback, Review Score</div>
+              </div>
+            </div>
+            <a href="details.html#quality" class="cat-link">View →</a>
+          </li>
+          <li class="category-item">
+            <div class="category-left">
+              <div class="cat-icon" style="background:#f0fdf4">📅</div>
+              <div>
+                <div class="cat-name">Attendance & Engagement</div>
+                <div class="cat-desc">Presence, Lateness, Meetings</div>
+              </div>
+            </div>
+            <a href="details.html#attendance" class="cat-link">View →</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dev Summary -->
+      <div class="section-box">
+        <div class="section-title">
+          Developer Summary
+          <a class="view-all" href="details.html">View All →</a>
+        </div>
+        <div class="dev-summary-list" id="devSummary"></div>
+      </div>
+
+    </div>
+
+    <!-- ATTENDANCE REPORT -->
+    <div class="report-section" id="attendance-report" style="margin-bottom:36px">
+      <div class="section-title">📅 Attendance Report <span>All Employees · Sprint 24</span></div>
+      <div class="report-table-wrap">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Role</th>
+              <th>Days Present</th>
+              <th>Late Arrivals</th>
+              <th>Meetings Attended</th>
+              <th>Attendance %</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PERFORMANCE REPORT -->
+    <div class="report-section" id="performance-report">
+      <div class="section-title">📊 Performance Report <span>All Employees · Sprint 24</span></div>
+      <div class="report-table-wrap">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Role</th>
+              <th>Error Rate</th>
+              <th>Client Feedback</th>
+              <th>Review Score</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="performanceTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+<script src="dashboard.js"></script>
+</body>
+</html>
